@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+    <meta charset="UTF-8">
+    <title>Rock Paper Scissors Game</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+  </head>
+
+  <body>
+
+    <div class="container-fluid">
+      <!-- HEADER -->
+      <div class="row">
+        <div class="col-12 text-center border rounded-bottom bg-danger">
+          <h1 class="display-1 text-white">ROCK-PAPER-SCISSORS</h1>
+        </div>
+      </div>
+      <!-- INFO -->
+      <div class="row p-4 mt-4">
+        <div class="col-12 text-center">
+          <p class="text-secondary lead mb-0">Press "R", "P", "S"</p>
+        </div>
+      </div>
+      <!-- TITLES -->
+      <div class="row">
+        <div class="col-3"></div>
+        <div class="col-3">
+            <h2 class="text-center display-4">Player</h2>
+        </div>
+        <div class="col-3">
+            <h2 class="text-center display-4">Computer</h2>
+        </div>
+        <div class="col-3"></div>
+      </div>
+      <!-- IMAGES -->
+      <div class="row">
+        <div class="col-3"></div>
+        <div class="col-3">
+            <div id="user" class="text-center"><img src="start.png" class="w-75"></div>
+        </div>
+        <div class="col-3">
+            <div id="computer" class="text-center"><img src="start.png" class="w-75"></div>
+        </div>
+        <div class="col-3"></div>
+      </div> 
+      <!-- SCORES --> 
+      <div class="row mt-5">
+        <div class="col-3"></div>
+        
+        <div class="col-3">
+            <h2 class="text-center bg-success text-white display-4 rounded"><strong><span id="winPlayer">0</span></strong></h2>
+        </div>
+        <div class="col-3">
+            <h2 class="text-center bg-success text-white display-4 rounded"><strong><span id="winComp">0</span></strong></h2>
+        </div>
+        <div class="col-3"></div>
+      </div>
+      <!-- TIE WARNING -->
+      <div class="row">
+        <div class="col-4"></div>
+        <div class="col-4">
+          <p class="text-center text-primary display-4"><span id="tie"></span></p>
+        </div>
+        <div class="col-4"></div>
+      </div> 
+    </div>
+
+
+    <script type="text/javascript">
+
+      var rps = ["rock.jpg", "paper.jpg", "scissors.jpg"];
+      var compSelection ,userSelection, rnd;
+      var win = 0;
+      var lose = 0;
+      var tie = "It's a tie!";
+      var resultWin, resultLose, image;
+
+      // Selects the right image and places it in the right html tag.
+      function replaceImg(handImg, locater) {
+        image = document.createElement("IMG");
+        image.setAttribute("src", handImg);
+        image.setAttribute("class", "w-75");
+        document.getElementById(locater).innerHTML = "";
+        document.getElementById(locater).appendChild(image);
+      }
+
+      // When the key is pressed computer and player selections are determined and replaceImg() is called.
+      document.onkeydown = function(event) {
+        rnd = Math.floor(Math.random() * 3);
+        compSelection = rps[rnd];
+        replaceImg(compSelection, 'computer');
+        document.getElementById("tie").textContent = "";
+
+        userSelection = event.key;
+
+        if (userSelection == "r") {
+          userSelection = rps[0];
+          replaceImg(userSelection, 'user');
+        }
+        if (userSelection == "p") {
+          userSelection = rps[1];
+          replaceImg(userSelection, 'user');
+        }
+        if (userSelection == "s") {
+          userSelection = rps[2];
+          replaceImg(userSelection, 'user');
+        }
+      }
+      
+      // When the pressed key is released the winner and loser are determined for the round.
+      document.onkeyup = function(event) {
+        if ((userSelection === "rock.jpg" && compSelection === "scissors.jpg") || (userSelection === "scissors.jpg" && compSelection === "paper.jpg") || (userSelection === "paper.jpg" && compSelection === "rock.jpg")) {
+          resultWin = ++win;
+          document.getElementById("winPlayer").textContent = resultWin;
+        }
+
+        else if (userSelection === compSelection) {
+          document.getElementById("tie").textContent = tie;
+        }
+
+        else if ((userSelection === "scissors.jpg" && compSelection === "rock.jpg") || (userSelection === "paper.jpg" && compSelection === "scissors.jpg") || (userSelection === "rock.jpg" && compSelection === "paper.jpg")) {
+          resultLose = ++lose;
+          document.getElementById("winComp").textContent = resultLose; 
+        } 
+      }
+
+    </script>
+
+  </body>
+
+</html>
