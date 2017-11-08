@@ -7,9 +7,15 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
   </head>
 
+  <style type="text/css">
+    body { display: flex; min-height: 100vh; flex-direction: column; }
+    .content { flex: 1 0 auto; }
+    .footer { border-top: 5px solid #dc3545; }
+  </style>
+
   <body>
 
-    <div class="container-fluid">
+    <div class="container-fluid content">
       <!-- HEADER -->
       <div class="row">
         <div class="col-12 text-center border rounded-bottom bg-danger">
@@ -37,10 +43,10 @@
       <div class="row">
         <div class="col-3"></div>
         <div class="col-3">
-            <div id="user" class="text-center"><img src="start.png" class="w-75"></div>
+            <div id="user" class="text-center"><img src="images/start.png" class="w-50"></div>
         </div>
         <div class="col-3">
-            <div id="computer" class="text-center"><img src="start.png" class="w-75"></div>
+            <div id="computer" class="text-center"><img src="images/start.png" class="w-50"></div>
         </div>
         <div class="col-3"></div>
       </div> 
@@ -79,8 +85,8 @@
       // Selects the right image and places it in the right html tag.
       function replaceImg(handImg, locater) {
         image = document.createElement("IMG");
-        image.setAttribute("src", handImg);
-        image.setAttribute("class", "w-75");
+        image.setAttribute("src", "images/" + handImg);
+        image.setAttribute("class", "w-50");
         document.getElementById(locater).innerHTML = "";
         document.getElementById(locater).appendChild(image);
       }
